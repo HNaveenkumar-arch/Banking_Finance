@@ -608,8 +608,8 @@
         </a>
         <div class="nav-right">
             <a href="404page.html" class="nav-link"><i class="fa-solid fa-globe"></i> Help</a>
-            <a href="404page.html" class="nav-link"><i class="fa-solid fa-language"></i> EN <i class="fa-solid fa-chevron-down"
-                    style="font-size:10px;"></i></a>
+            <a href="404page.html" class="nav-link"><i class="fa-solid fa-language"></i> EN <i
+                    class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
             <a href="login.html" class="btn-login">Login</a>
         </div>
     </header>
@@ -792,7 +792,8 @@
 
                     <div class="checkbox-group">
                         <input type="checkbox" id="terms">
-                        <label for="terms">I agree to the <a href="404page.html">Terms & Conditions</a> and <a href="404page.html">Privacy
+                        <label for="terms">I agree to the <a href="404page.html">Terms & Conditions</a> and <a
+                                href="404page.html">Privacy
                                 Policy</a></label>
                     </div>
                     <span class="error-msg" id="err-terms" style="margin-top:-20px; margin-bottom:15px;">You must agree
@@ -804,11 +805,13 @@
 
 
                     <div class="social-btns">
-                        <button type="button" onclick="window.location.href='404page.html'" class="btn-social"><img src="./asset/image2.webp" alt="G"> Google</button>
-                        <button type="button" onclick="window.location.href='404page.html'" class="btn-social"><i class="fa-brands fa-apple"
-                                style="font-size:16px;"></i> Apple</button>
-                        <button type="button" onclick="window.location.href='404page.html'" class="btn-social"><i class="fa-brands fa-facebook"
-                                style="color:#1877F2; font-size:16px;"></i> Facebook</button>
+                        <button type="button" onclick="window.location.href='404page.html'" class="btn-social"><img
+                                src="./asset/image2.webp" alt="G"> Google</button>
+                        <button type="button" onclick="window.location.href='404page.html'" class="btn-social"><i
+                                class="fa-brands fa-apple" style="font-size:16px;"></i> Apple</button>
+                        <button type="button" onclick="window.location.href='404page.html'" class="btn-social"><i
+                                class="fa-brands fa-facebook" style="color:#1877F2; font-size:16px;"></i>
+                            Facebook</button>
                     </div>
 
 
@@ -826,7 +829,6 @@
     </main>
 
     <script>
-
         document.addEventListener("DOMContentLoaded", () => {
             gsap.fromTo(".gsap-left",
                 { x: -100, opacity: 0, scale: 0.95 },
@@ -838,7 +840,6 @@
                 { x: 0, opacity: 1, scale: 1, duration: 1, ease: "power3.out", delay: 0.2 }
             );
         });
-
 
         function togglePwd(id, icon) {
             let input = document.getElementById(id);
@@ -853,12 +854,9 @@
             }
         }
 
-
-
-
         const dobInput = document.getElementById('dob');
         dobInput.addEventListener('input', function (e) {
-            let val = this.value.replace(/[^0-9]/g, ''); 
+            let val = this.value.replace(/[^0-9]/g, '');
             if (val.length > 2 && val.length <= 4) {
                 val = val.slice(0, 2) + '/' + val.slice(2);
             } else if (val.length > 4) {
@@ -868,14 +866,12 @@
             clearError(this);
         });
 
-
         const phoneInput = document.getElementById('phone');
         phoneInput.addEventListener('input', function () {
             this.value = this.value.replace(/[^0-9]/g, '');
             document.getElementById('mobileWrap').classList.remove('error');
             document.getElementById('err-phone').style.display = 'none';
         });
-
 
         function showError(input, message) {
             input.classList.add('error');
@@ -896,12 +892,10 @@
             }
         }
 
-
         const form = document.getElementById('signupForm');
         form.addEventListener('submit', function (e) {
             e.preventDefault();
             let isValid = true;
-
 
             const role = document.getElementById('userRole');
             const roleWrap = document.getElementById('roleWrap');
@@ -914,7 +908,6 @@
                 document.getElementById('err-role').style.display = 'none';
             }
 
-
             const nameRegex = /^[A-Za-z\s]+$/;
             const fName = document.getElementById('fName');
             const lName = document.getElementById('lName');
@@ -925,11 +918,9 @@
             if (lName.value.trim() === "") { showError(lName, "Last name is required"); isValid = false; }
             else if (!nameRegex.test(lName.value)) { showError(lName, "Numbers/Symbols are not allowed"); isValid = false; }
 
-
             const dobRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/\d{4}$/;
             if (dobInput.value.trim() === "") { showError(dobInput, "DOB is required"); isValid = false; }
             else if (!dobRegex.test(dobInput.value)) { showError(dobInput, "Invalid format. Use DD/MM/YYYY"); isValid = false; }
-
 
             const mobileWrap = document.getElementById('mobileWrap');
             if (phoneInput.value.trim() === "" || phoneInput.value.length < 10) {
@@ -939,17 +930,29 @@
                 isValid = false;
             }
 
-
             const email = document.getElementById('email');
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (email.value.trim() === "" || !emailRegex.test(email.value)) { showError(email, "Please enter a valid email"); isValid = false; }
 
-
+            // UPDATED: Password Check with Minimum 6 Characters
             const pwd = document.getElementById('pwd');
             const cPwd = document.getElementById('cPwd');
-            if (pwd.value.trim() === "") { showError(pwd, "Password is required"); isValid = false; }
-            if (cPwd.value.trim() === "" || cPwd.value !== pwd.value) { showError(cPwd, "Passwords do not match"); isValid = false; }
 
+            if (pwd.value.trim() === "") {
+                showError(pwd, "Password is required");
+                isValid = false;
+            } else if (pwd.value.length < 6) {
+                showError(pwd, "Password must be at least 6 characters");
+                isValid = false;
+            }
+
+            if (cPwd.value.trim() === "") {
+                showError(cPwd, "Please confirm your password");
+                isValid = false;
+            } else if (cPwd.value !== pwd.value) {
+                showError(cPwd, "Passwords do not match");
+                isValid = false;
+            }
 
             const requiredFields = ['gender', 'username', 'country', 'address', 'city', 'state', 'zip'];
             requiredFields.forEach(id => {
@@ -957,24 +960,18 @@
                 if (el.value.trim() === "") { showError(el, "This field is required"); isValid = false; }
             });
 
-
             const terms = document.getElementById('terms');
             if (!terms.checked) { document.getElementById('err-terms').style.display = 'block'; isValid = false; }
 
-
             if (isValid) {
-
-
                 window.location.href = 'login.html'
             }
         });
-
 
         document.querySelectorAll('input, select').forEach(input => {
             input.addEventListener('input', () => { clearError(input); });
             input.addEventListener('change', () => { clearError(input); });
         });
-
 
         document.getElementById('userRole').addEventListener('change', () => {
             document.getElementById('roleWrap').classList.remove('error');
@@ -984,7 +981,6 @@
         document.getElementById('terms').addEventListener('change', () => {
             if (document.getElementById('terms').checked) document.getElementById('err-terms').style.display = 'none';
         });
-
     </script>
 </body>
 
