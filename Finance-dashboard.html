@@ -10,6 +10,15 @@
 
     <link rel="stylesheet" href="Finance-dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const storedEmail = localStorage.getItem('userEmail');
+        
+        if (!storedEmail) {
+            alert("Access Denied! Please login first.");
+            window.location.replace("login.html"); 
+        }
+    </script>
 </head>
 
 <body>
